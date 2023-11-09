@@ -7,7 +7,7 @@ using BCrypt.Net;
 
 public interface IUserService
 {
-    AuthenticateResponse Authenticate(AuthenticateRequest model);
+    // AuthenticateResponse Authenticate(AuthenticateRequest model);
     IEnumerable<User> All();
     User Find(int id);
     User Create(CreateRequest model);
@@ -24,7 +24,7 @@ public class UserService : IUserService
         _context = context;
     }
 
-    public AuthenticateResponse Authenticate(AuthenticateRequest model)
+    // public AuthenticateResponse Authenticate(AuthenticateRequest model)
 
     public IEnumerable<User> All()
     {
