@@ -7,8 +7,8 @@ using BCrypt.Net;
 
 public interface IUserService
 {
-    // AuthenticateResponse Authenticate(AuthenticateRequest model);
     IEnumerable<User> All();
+    User FindByUsername(string username);
     User Find(int id);
     User Create(CreateRequest model);
     void Update(int id, UpdateRequest model);
@@ -24,11 +24,22 @@ public class UserService : IUserService
         _context = context;
     }
 
-    // public AuthenticateResponse Authenticate(AuthenticateRequest model)
+ 
 
     public IEnumerable<User> All()
     {
         return _context.Users;
+    }
+
+    // find by username
+    public User FindByUsername(string username)
+    {
+        var user = _context.Users.SingleOrDefault(x => x.Username == username);
+        if (user == null)
+        {
+            throw new AppException("User not found");
+        }
+        return user;
     }
 
     public User Find(int id)
