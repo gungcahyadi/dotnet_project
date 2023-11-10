@@ -4,6 +4,7 @@ using project3.Entities;
 using project3.Models.Users;
 using project3.Helpers;
 using BCrypt.Net;
+using Microsoft.EntityFrameworkCore;
 
 public interface IUserService
 {
@@ -24,12 +25,10 @@ public class UserService : IUserService
         _context = context;
     }
 
- 
-
     public IEnumerable<User> All()
     {
         return _context.Users;
-    }
+    }    
 
     // find by username
     public User FindByUsername(string username)

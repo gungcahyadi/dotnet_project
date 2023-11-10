@@ -12,6 +12,6 @@ namespace project3.Entities
         public string? Email { get; set; }
         [JsonIgnore]
         public string? PasswordHash { get; set; }
-        // public string? RememberToken { get; set; }
+        // public string? RememberToken { get; set; }        
     }
 }
