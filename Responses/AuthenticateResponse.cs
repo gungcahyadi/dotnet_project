@@ -8,15 +8,19 @@ namespace project3.Responses
         public string? Name { get; set; }
         public string? Username { get; set; }
         public string? Email { get; set; }
-        // public string? Token { get; set; }
+        public string? Token { get; set; }
 
-        public AuthenticateResponse(User user)
+        public AuthenticateResponse(User user, string token)
         {
-            Id = user.Id.ToString();
-            Name = user.Name;
-            Username = user.Username;
-            Email = user.Email;
-            // Token = token;
+
+            if (user != null)
+            {
+                Id = user.Id.ToString();
+                Name = user.Name;
+                Username = user.Username;
+                Email = user.Email;
+            }
+            Token = token;
         }
     }
 }

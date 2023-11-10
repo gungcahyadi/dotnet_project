@@ -17,7 +17,7 @@ namespace project3.Controllers
         }
 
         [HttpPost]
-        public IActionResult Authenticate([FromBody] AuthenticateRequest model)
+        public IActionResult Authenticate(AuthenticateRequest model)
         {
             try
             {
