@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using project3.Models.Users;
 using project3.Services;
@@ -14,8 +15,9 @@ public class UserController : ControllerBase
     {
         _userService = userService;
     }
-
+        
     [HttpGet]
+    [Authorize]
     public IActionResult All()
     {
         var users = _userService.All();
@@ -23,6 +25,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public IActionResult Find(int id)
     {
         var user = _userService.Find(id);
@@ -30,6 +33,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     public IActionResult Create(CreateRequest model)
     {
         var user = _userService.Create(model);
@@ -38,6 +42,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize]
     public IActionResult Update(int id, UpdateRequest model)
     {
         _userService.Update(id, model);
@@ -45,6 +50,7 @@ public class UserController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize]
     public IActionResult Delete(int id)
     {
         _userService.Delete(id);
