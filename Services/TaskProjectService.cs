@@ -4,7 +4,7 @@ using project3.Entities;
 using project3.Models.Tasks;
 using project3.Helpers;
 using System.Collections.Generic;
-
+using Microsoft.EntityFrameworkCore;
 
 public interface ITaskProjectService
 {
@@ -24,11 +24,9 @@ public class TaskProjectService : ITaskProjectService
         _context = context;
     }
 
-
-
     public IEnumerable<Task> All()
     {
-        return _context.Tasks;
+        return _context.Tasks.Include(x => x.User).ToList();
     }
 
     public Task Find(int id)
