@@ -5,12 +5,15 @@ using project3.Models.Tasks;
 using project3.Helpers;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Identity;
 
 public interface ITaskProjectService
 {
     IEnumerable<Task> All();
     Task Find(int id);
-    Task Create(CreateTaskRequest model);
+    Task Create(CreateTaskRequest model, string UserId);
     void Update(int id, UpdateTaskRequest model);
     void Delete(int id);
 }
@@ -18,6 +21,7 @@ public interface ITaskProjectService
 public class TaskProjectService : ITaskProjectService
 {
     private readonly DataContext _context;
+    
 
     public TaskProjectService(DataContext context)
     {
@@ -39,11 +43,13 @@ public class TaskProjectService : ITaskProjectService
         return task;
     }
 
-    public Task Create(CreateTaskRequest model)
-    {        
+    public Task Create(CreateTaskRequest model, string UserId)
+    {
+        
+        var id = int.Parse(UserId);
         var task = new Task
         {
-            UserId = 1,
+            UserId = id,
             Title = model.Title,
             Description = model.Description
         };

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using project3.Models.Tasks;
@@ -36,7 +37,9 @@ public class TasksController : ControllerBase
     [Authorize]
     public IActionResult Create(CreateTaskRequest model)
     {
-        var task = _taskService.Create(model);
+        var UserId = this.User.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+
+        var task = _taskService.Create(model, UserId);
         return Ok(new { message = "Task created successfully" });
 
     }
